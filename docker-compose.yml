@@ -1,0 +1,20 @@
+services:
+  line-provider:
+    build: ./line-provider/
+    ports:
+      - "8000:8080"
+    volumes:
+      - line_provider_data:/line_provider.db
+  
+  bet_maker:
+    build: ./bet_maker/
+    ports:
+      - "8001:8081"
+    depends_on:
+      - line-provider
+    volumes:
+      - bet_maker_data:/bet_maker.db
+volumes:
+  line_provider_data:
+  bet_maker_data:
+
